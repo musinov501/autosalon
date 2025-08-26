@@ -5,24 +5,29 @@ from .models import Cars, Brand
 # Create your views here.
 
 def home(request: HttpRequest):
-    return HttpResponse('<h1 style= "color: green; text-align: center;">Assalomu alaykum Autasalonga Xush kelibsiz</h1>')
-
-
-def cars(request: HttpRequest):
-    automobiles = Cars.objects.all()
-
+    cars = Cars.objects.all()
+    brands = Brand.objects.all()
     context = {
-        "automobiles": automobiles
+        'cars': cars,
+        'brands': brands
     }
+    return render(request, "autosalon/index.html", context)
 
-    return render(request, "autosalon/cars.html", context)
 
-
-def brands(request: HttpRequest):
-    cars_brands = Brand.objects.all()
-
+def cars_by_brand(request: HttpRequest, brand_id):
+    cars = Cars.objects.filter(brand_id= brand_id)
+    brands = Brand.objects.all()
     context = {
-        "cars_brands": cars_brands
+        'cars': cars,
+        'brands': brands
     }
+    return render(request, "autosalon/index.html", context)
 
-    return render(request, "autosalon/brands.html", context)
+def show_in_detail(request: HttpRequest, pk: int):
+    brands = Brand.objects.all()
+    car = Cars.objects.get(pk=pk)
+    context = {
+        'car': car,
+        'brands': brands
+    }
+    return render(request, 'autosalon/detail.html', context)
