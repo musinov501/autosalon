@@ -9,7 +9,8 @@ def home(request: HttpRequest):
     brands = Brand.objects.all()
     context = {
         'cars': cars,
-        'brands': brands
+        'brands': brands,
+        'title': "Barcha mashinalar"
     }
     return render(request, "autosalon/index.html", context)
 
@@ -19,7 +20,8 @@ def cars_by_brand(request: HttpRequest, brand_id):
     brands = Brand.objects.all()
     context = {
         'cars': cars,
-        'brands': brands
+        'brands': brands,
+        'title': Brand.objects.get(pk = brand_id).name
     }
     return render(request, "autosalon/index.html", context)
 
@@ -28,6 +30,7 @@ def show_in_detail(request: HttpRequest, pk: int):
     car = Cars.objects.get(pk=pk)
     context = {
         'car': car,
-        'brands': brands
+        'brands': brands,
+        'title': car.model
     }
     return render(request, 'autosalon/detail.html', context)

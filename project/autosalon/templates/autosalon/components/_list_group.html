@@ -1,0 +1,11 @@
+<div class="list-group list-group-light">
+            {% for brand in brands %}
+            <a href="{% url 'by_brand' brand.pk %}"
+               class="list-group-item list-group-item-action px-3 py-2 mb-2 border-0 rounded hover:bg-lightblue"
+               style="transition: all 0.3s; background-color: #f8f9fa;">
+                <i class="fas fa-car me-2"></i> {{ brand.name }}
+            </a>
+            {% endfor %}
+        </div>
+
+
